@@ -1,9 +1,27 @@
 [
   {
     "name": "openlist",
+    "server": "http://10.1.1.11:5244/",
+    "startPage": "/",
+    "realStartPage": "/guest",
+    "search": true
+  },
+  {
+    "name": "openlist",
     "server": "http://10.1.1.12:5244/",
     "startPage": "/",
     "realStartPage": "/tvbox",
-    "search": true
+    "search": true,
+    "username": "tvbox",
+    "password": "mypass"
+  },
+  {
+    "name": "openlist",
+    "server": "http://10.1.1.13:5244/",
+    "startPage": "/",
+    "realStartPage": "/",
+    "search": true,
+    "username": "admin",
+    "password": "password"
   }
 ]
