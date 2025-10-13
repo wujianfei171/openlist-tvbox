@@ -41,6 +41,9 @@
  * logcat | grep quickjs
  */
 
+import { distance } from './mod.js'
+import { sortListByCN } from './sortName.js'
+
 String.prototype.rstrip = function (chars) {
   let regex = new RegExp(chars + "$");
   return this.replace(regex, "");
