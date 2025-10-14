@@ -407,7 +407,7 @@ const http = function (url, options = {}) {
 const __drives = {};
 
 function isMedia(file) {
-  return /\.(dff|dsf|mp3|aac|wav|wma|cda|flac|m4a|mid|mka|mp2|mpa|mpc|ape|ofr|ogg|ra|wv|tta|ac3|dts|tak|webm|wmv|mpeg|mov|ram|swf|mp4|avi|rm|rmvb|flv|mpg|mkv|m3u8|ts|3gp|asf)$/.test(file.toLowerCase());
+  return /\.(dff|dsf|mp3|aac|wav|wma|cda|flac|m4a|mid|mka|mp2|mpa|mpc|ape|ofr|ogg|ra|wv|tta|ac3|dts|tak|webm|wmv|mpeg|mov|ram|swf|mp4|avi|rm|rmvb|flv|mpg|mkv|m3u8|ts|3gp|asf|strm)$/.test(file.toLowerCase());
 }
 
 function get_drives_path(tid) {
@@ -872,12 +872,20 @@ function detail(tid) {
 function play(flag, id, flags) {
   const drives = get_drives(flag);
   const urls = id.split("@@@"); // @@@ 分割前是 相对文件path,分割后是字幕文件
+
   let vod = {
     'parse': 0,
     'playUrl': '',
     // 'url': drives.getFile(urls[0]).raw_url+'#.m3u8' // 加 # 没法播放
     'url': drives.getFile(urls[0]).raw_url
   };
+
+  // 处理 strm
+  const reg = /\.strm(?:\?sign=[A-Za-z0-9\-\_]+=:0)?$/i;
+  if (reg.test(vod.url)) {
+    vod.url = http.get(vod.url).text();
+  }
+
   if (urls.length >= 2) {
     const path = urls[0].substring(0, urls[0].lastIndexOf('/') + 1);
     vod.subt = drives.getFile(path + urls[1]).raw_url1;
