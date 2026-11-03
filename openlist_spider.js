@@ -756,7 +756,7 @@ function category(tid, pg, filter, extend) {
   } else {
     // 没传order是其他地方调用的,自动按名称正序排序方便追剧,如果传了none进去就不排序，假装云盘里本身文件顺序是正常的
     if (detail_order !== 'none') {
-      allList = sortListByName(allList, 'vod_name', 'asc');
+      allList = sortListByName(allList, 'vod_time', 'desc');
     }
   }
 
